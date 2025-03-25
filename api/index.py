@@ -16,7 +16,8 @@ class GetGambar():
             except ValueError:
                 return {"error": "Response bukan JSON yang valid"}
         else:
-            return {"error": f"Request gagal dengan status {response.status_code}"}
+            return "https://raw.githubusercontent.com/datadebasa/image-generator/refs/heads/main/gagal_boss.jpeg"
+            # return {"error": f"Request gagal dengan status {response.status_code}"}
 
 
 
