@@ -1,28 +1,36 @@
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fpython%2Fflask3&demo-title=Flask%203%20%2B%20Vercel&demo-description=Use%20Flask%203%20on%20Vercel%20with%20Serverless%20Functions%20using%20the%20Python%20Runtime.&demo-url=https%3A%2F%2Fflask3-python-template.vercel.app%2F&demo-image=https://assets.vercel.com/image/upload/v1669994156/random/flask.png)
+# 📌 Image Generator
 
-# Flask + Vercel
+Image Generator adalah proyek open-source untuk menghasilkan gambar berdasarkan prompt teks. 
 
-This example shows how to use Flask 3 on Vercel with Serverless Functions using the [Python Runtime](https://vercel.com/docs/concepts/functions/serverless-functions/runtimes/python).
+## 🚀 Fitur
+- Menghasilkan gambar berdasarkan input pengguna
+- Tampilan responsif dengan Bootstrap
+- Animasi loading saat proses generate gambar
+- Tombol unduh 
 
-## Demo
+## 📥 Instalasi
 
-https://flask-python-template.vercel.app/
+1. Clone repository:
+   ```sh
+   git clone https://github.com/datadebasa/image-generator.git
+   ```
+2. Masuk ke direktori proyek:
+   ```sh
+   cd image-generator
+   ```
+3. Jalankan server lokal (jika ada backend):
+   ```sh
+   python api/index.py
+   ```
 
-## How it Works
+## 🔧 Cara Menggunakan
 
-This example uses the Web Server Gateway Interface (WSGI) with Flask to enable handling requests on Vercel with Serverless Functions.
+1. Masukkan prompt teks pada input field.
+2. Klik tombol `Generate` untuk membuat gambar.
+3. Tunggu proses hingga selesai.
+4. Klik tombol `Download` untuk menyimpan gambar ke perangkat.
 
-## Running Locally
 
-```bash
-npm i -g vercel
-vercel dev
-```
-
-Your Flask application is now available at `http://localhost:3000`.
-
-## One-Click Deploy
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=vercel-examples):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fpython%2Fflask3&demo-title=Flask%203%20%2B%20Vercel&demo-description=Use%20Flask%203%20on%20Vercel%20with%20Serverless%20Functions%20using%20the%20Python%20Runtime.&demo-url=https%3A%2F%2Fflask3-python-template.vercel.app%2F&demo-image=https://assets.vercel.com/image/upload/v1669994156/random/flask.png)
+## 📎 Repository
+Kode sumber tersedia di GitHub:
+🔗 [Image Generator Repository](https://github.com/datadebasa/image-generator)
