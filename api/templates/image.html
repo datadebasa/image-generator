@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gawe Gambar Online</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #0d1117;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #1e293b;
+        }
+
+        .navbar-brand {
+            color: white;
+            font-weight: bold;
+        }
+
+        .navbar-nav .nav-link {
+            color: white;
+        }
+
+        .navbar-toggler {
+            border-color: white;
+        }
+
+        .navbar-toggler-icon {
+            filter: invert(1);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #1e293b, #0d1117);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .cta-button {
+            background-color: #4CAF50;
+            padding: 12px 24px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #3a9c40;
+        }
+
+        .features {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .features h2 {
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: #1e1e1e;
+            border: none;
+            color: white;
+        }
+
+        .generator {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .input-group {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        #generated-image {
+            margin-top: 20px;
+            max-width: 100%;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/">Gawe Gambar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Fitur</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Kontak</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>Gawe Gambar Online</h1>
+        <p>Open-source image generator untuk kreativitas tanpa batas.</p>
+        <a href="#generator" class="cta-button">Coba Sekarang</a>
+    </div>
+
+
+    <div class="container generator" id="generator">
+        <h2>Generate Gambar</h2>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Masukkan prompt gambar" id="imagePrompt">
+            <button class="btn btn-success" onclick="generateImage()">Generate</button>
+        </div>
+        <div id="loading" style="display: none; text-align: center; margin-top: 20px;">
+            <div class="spinner-border text-light" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p>Generating image...</p>
+        </div>
+        <div id="imageContainer" class="text-center">
+            <img id="generated-image" src="" alt="Generated Image" class="d-block mx-auto"
+                style="display: none; max-width: 100%; border-radius: 5px;">
+            <a id="download-button" href="#" download="generated-image.jpg" class="btn btn-primary mt-3" style="display: none;">
+                Download Gambar
+            </a>
+        </div>
+        
+
+    </div>
+
+    <script>
+        async function generateImage() {
+            let prompt = document.getElementById("imagePrompt").value;
+            let loadingElement = document.getElementById("loading");
+            let imgElement = document.getElementById("generated-image");
+            let downloadButton = document.getElementById("download-button"); // Ambil tombol download
+    
+            if (prompt.trim() === "") {
+                alert("Masukkan prompt gambar terlebih dahulu!");
+                return;
+            }
+    
+            // Menampilkan animasi loading dan menyembunyikan gambar & tombol download sebelumnya
+            loadingElement.style.display = "block";
+            imgElement.style.display = "none";
+            downloadButton.style.display = "none";
+    
+            try {
+                let response = await fetch(`/get-gambar?prompt=${encodeURIComponent(prompt)}`);
+                let result = await response.json();
+    
+                if (result.payload && result.payload.data) {
+                    let imageUrl = result.payload.data;
+                    imgElement.src = imageUrl;
+                    imgElement.style.display = "block";
+    
+                    // Menampilkan tombol download dan mengatur linknya
+                    downloadButton.href = imageUrl;
+                    downloadButton.style.display = "inline-block";
+                } else {
+                    alert("Gagal mengambil gambar. Silakan coba lagi.");
+                }
+            } catch (error) {
+                console.error("Error fetching image:", error);
+                alert("Terjadi kesalahan saat mengambil gambar.");
+            } finally {
+                // Menyembunyikan animasi loading setelah selesai
+                loadingElement.style.display = "none";
+            }
+        }
+    </script>
+    
+
+    <footer class="text-center py-4 bg-dark">
+        <p>&copy; 2025 Gawe Gambar Online. Dibangun dengan cinta oleh komunitas open-source.</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
